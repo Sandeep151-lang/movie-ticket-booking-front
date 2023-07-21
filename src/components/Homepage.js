@@ -24,7 +24,7 @@ const Homepage = () => {
     }, [])
 
     const card = (e) => {
-        history.push(`/ticket/${e._id}`)
+        history.push(`/ticket/${e?._id}`)
     }
 
     return (

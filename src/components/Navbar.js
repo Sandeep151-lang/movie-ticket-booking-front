@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
-import { url } from './common';
+import { url ,token} from './common';
 
 
 const Navbar = (props) => {
@@ -11,10 +11,7 @@ const Navbar = (props) => {
         // const token = window.localStorage.getItem('jwt')
         try {
 
-            const res = await axios.create({
-                withCredentials: true,
-                credentials: "include",
-            }).get(`${url}/about`)
+            const res = await axios.post(`${url}/about`,{token})
             // console.log(res.data.message)
             if (res.status === 200) {
                 localStorage.getItem('jwt');
@@ -33,6 +30,9 @@ const Navbar = (props) => {
         userdata()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+
+
 
     return (
 

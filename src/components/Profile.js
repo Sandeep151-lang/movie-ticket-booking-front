@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router'
 import { Card } from 'reactstrap'
-import { url } from './common';
+import { url,token } from './common';
 // import LoadingSpinner from './LoadingSpinner';
 // import { toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
@@ -17,10 +17,7 @@ const Profile = () => {
         // const token = window.localStorage.getItem('jwt')
         try {
 
-            const res = await axios.create({
-                withCredentials: true,
-                credentials: "include",
-            }).get(`${url}/about`)
+            const res = await axios.post(`${url}/about`,{token})
             // console.log(res.data.message)
             if (res.status === 200) {
                 localStorage.getItem('jwt');

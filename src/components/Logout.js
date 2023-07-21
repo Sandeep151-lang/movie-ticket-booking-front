@@ -8,11 +8,9 @@ const Logout = (props) => {
     const { dispatch } = props
     const history = useHistory();
     useEffect(() => {
-        axios.create({
-            //baseURL: "http://localhost:5000",
-            withCredentials: true,
-            credentials: "include",
-        }).get(`${url}/logout`).then((res) => {
+      axios.get(`${url}/logout`).then((res) => {
+        localStorage.removeItem('token')
+        localStorage.removeItem('id')
             history.push('/login', { replace: true })
             dispatch({ type: 'USER', payload: false })
 

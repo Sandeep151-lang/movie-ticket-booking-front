@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Container } from 'reactstrap';
 import StripeCheckout from 'react-stripe-checkout';
-import { url } from './common';
+import { url,token } from './common';
 
 
 const TicketBooking = () => {
@@ -20,10 +20,7 @@ const TicketBooking = () => {
         // const token = window.localStorage.getItem('jwt')
         try {
 
-            const res = await axios.create({
-                withCredentials: true,
-                credentials: "include",
-            }).get(`${url}/about`)
+            const res = await axios.post(`${url}/about`,{token})
             // console.log(res.data.message)
             if (res.status === 200) {
                 localStorage.getItem('jwt');
@@ -37,6 +34,7 @@ const TicketBooking = () => {
 
         }
     }
+
 
     const handle = (e) => {
         e.preventDefault()
@@ -77,7 +75,6 @@ const TicketBooking = () => {
     }, [])
 
     if (data.Seats === undefined) {
-        console.log('undefined')
     } else {
         const yo = data.Seats.map((x) => Object.values(x))
         var s = yo.length === 0 ? [] : yo.reduce((x, y) => x.concat(y))
@@ -90,7 +87,7 @@ const TicketBooking = () => {
     const TotalSeats = seats.length
     const ticketbook = async () => {
         try {
-            await axios.post('/ticketBooking', { date, Time, Total, Movie_name, TotalSeats, seats, user_id })
+            await axios.post(`${url}/ticketBooking`, { date, Time, Total, Movie_name, TotalSeats, seats, user_id })
             alert('booked')
             cardData()
             history.push('/booking')

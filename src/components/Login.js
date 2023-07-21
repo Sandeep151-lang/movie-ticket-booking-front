@@ -42,12 +42,12 @@ const Login = (props) => {
             onSubmit={async (values) => {
                 // same shape as initial values
                 try {
-                    const post = await axios.create({
-                        withCredentials: true,
-                        credentials: 'include'
-                    }).post(`${url}/login`, values)
+                    const post = await axios.post(`${url}/login`, values)
+                    if(post){
 
-
+                        localStorage.setItem('token',post?.data?.token)
+                        localStorage.setItem('id',post?.data?._id)
+                    }
                     alert('Login successfully')
                     setinitialvalues(post)
                     history.push("/")
