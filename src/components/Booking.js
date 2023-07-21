@@ -11,7 +11,6 @@ import { url } from './common';
 const Booking = () => {
     //const [loading, setloading] = useState(true);
     const history = useHistory();
-    const [data, setdata] = useState([]);
     const [lis, setlist] = useState([])
     const userdata = async () => {
         try {
@@ -23,7 +22,6 @@ const Booking = () => {
             if (res.status === 200) {
                 localStorage.getItem('jwt');
 
-                setdata(res.data.message);
                 // console.log(res.data)
 
             }

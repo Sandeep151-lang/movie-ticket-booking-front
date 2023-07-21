@@ -6,7 +6,6 @@ import { url } from './common';
 
 const Navbar = (props) => {
     const { state, dispatch } = props;
-    const [data, setdata] = useState([]);
     const [loading, setloading] = useState(true);
     const userdata = async () => {
         // const token = window.localStorage.getItem('jwt')
@@ -19,7 +18,6 @@ const Navbar = (props) => {
             // console.log(res.data.message)
             if (res.status === 200) {
                 localStorage.getItem('jwt');
-                setdata(res.data.message);
                 dispatch({ type: 'USER', payload: true })
                 // console.log(res.data)
                 setloading(false);
